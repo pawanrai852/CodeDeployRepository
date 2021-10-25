@@ -1,18 +1,18 @@
 version: 0.2
-os: linux
-files:
-  - source: /index.html
-    destination: /var/www/html/
-hooks:
-  BeforeInstall:
-    - location: scripts/install_dependencies
-      timeout: 300
-      runas: root
-    - location: scripts/start_server
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: scripts/stop_server
-      timeout: 300
-      runas: root   
 
+phases:
+build:
+  commands:
+    - echo Building...
+artifacts:
+  files:
+    - '**/*'
+  secondary-artifacts:
+    artifact1:
+      files:
+        - directory/file1
+      name: MyAppBuild
+    artifact2:
+      files:
+        - directory/file2
+      name: MyAppBuild2
