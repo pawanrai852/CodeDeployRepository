@@ -1,30 +1,11 @@
-version: 0.2
-
-env:
-  variables:
-    NODE_ENV: "${env}"
-
 phases:
   install:
-    runtime-versions:
-      nodejs: 12
     commands:
-      - npm i
-      # - npm run lint
-  pre_build:
-    commands:
-      - npm i
-      - npm run test
+      # Node, NPM, AWS-CLI are preinstalled on this CodeBuild image.
+      - sudo apt-get update -y && sudo apt-get install -y make apt-transport-https
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+      - sudo apt-get update -y && sudo apt-get install -y yarn
   build:
     commands:
-      - npm run build
-
-artifacts:
-  files:
-    - "**/*"
-  name: "web-dist-${env}"
-  base-directory: build
-
-cache:
-  paths:
-    - /root/.npm/**/*
+      - make test ENV_FILE_PATH=env/example.env
