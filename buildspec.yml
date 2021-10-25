@@ -1,19 +1,30 @@
 version: 0.2
 
+env:
+  variables:
+    NODE_ENV: "${env}"
+
 phases:
   install:
     runtime-versions:
-      java: corretto11
+      nodejs: 12
+    commands:
+      - npm i
+      # - npm run lint
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase...
+      - npm i
+      - npm run test
   build:
     commands:
-      - echo Build started on `date`
-      - mvn install
-  post_build:
-    commands:
-      - echo Build completed on `date`
+      - npm run build
+
 artifacts:
   files:
-    - target/messageUtil-1.0.jar
+    - "**/*"
+  name: "web-dist-${env}"
+  base-directory: build
+
+cache:
+  paths:
+    - /root/.npm/**/*
