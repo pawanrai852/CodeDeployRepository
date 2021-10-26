@@ -10,15 +10,15 @@ phases:
     commands:
       # Install build tools
       # You can save this work by making a custom Docker image
-      - chmod +x bin/build*
+      #- chmod +x bin/build*
       # Install Erlang, Elixir, Node.js via OS packages
-      - bin/build-install-deps-ubuntu
+      #- bin/build-install-deps-ubuntu
       # - bin/build-install-deps-centos
       #
       # Install using ASDF
-      # - bin/build-install-asdf-deps-ubuntu
-      # - bin/build-install-asdf-deps-centos
-      # - bin/build-install-asdf-init
+       - bin/build-install-asdf-deps-ubuntu
+       - bin/build-install-asdf-deps-centos
+       - bin/build-install-asdf-init
   pre_build:
     commands:
       # Install using ASDF
