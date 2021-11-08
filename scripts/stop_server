@@ -1,0 +1,6 @@
+#!/bin/bash
+isExistApp = `pgrep apache2`
+if [[ -n  $isExistApp ]]; then
+    sudo /etc/init.d/apache2 stop        
+fi
+
